@@ -7,11 +7,12 @@ It is currently used to build the following client libraries:
 
   * [`java-asana`](https://github.com/Asana/java-asana)
   * [`node-asana`](https://github.com/Asana/node-asana)
+  * [`typescript-asana`](https://github.com/Asana/node-asana)
   * [`php-asana`](https://github.com/Asana/php-asana)
   * [`python-asana`](https://github.com/Asana/python-asana)
   * [`ruby-asana`](https://github.com/Asana/ruby-asana)
-  
-It is also used to build the [Asana API Reference](https://asana.com/developers/api-reference) in the developer documentation. 
+
+It is also used to build the [Asana API Reference](https://asana.com/developers/api-reference) in the developer documentation.
 
 ## Contributing
 
@@ -83,13 +84,13 @@ Examples of places where extracting helpers is useful are `paramsForAction` or `
   1. Push changes to origin `git push origin my-topic-branch`.
   2. Make a pull request in GitHub. This will automatically create a task in Asana.
   3. Once your request is reviewed, it can be merged.
-  
+
 ### Deploying
 
   1. Clone the repo, work on master.
   2. Bump the package version to indicate the [semantic version](http://semver.org/) change, using one of: `gulp bump-patch`, `gulp bump-feature`, or `gulp bump-release`
   3. Push changes to origin, including tags:
-     `git push origin master --tags` 
+     `git push origin master --tags`
 
 ### Propagating Changes to Client Libraries
 

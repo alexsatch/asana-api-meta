@@ -185,6 +185,10 @@ var langs = {
     typeName: typeNameTranslator("js"),
     comment: wrapStarComment
   }),
+  "ts": _.merge({}, common, {
+    typeName: typeNameTranslator("ts"),
+    comment: wrapStarComment
+  }),
   "php": _.merge({}, common, {
     typeName: typeNameTranslator("php"),
     comment: wrapStarComment

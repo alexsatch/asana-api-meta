@@ -31,6 +31,11 @@ var languages = {
     outputPath: 'lib/resources/gen',
     preserveRepoFiles: false
   },
+  ts: {
+    repo: 'Asana/typescript-asana',
+    outputPath: 'lib/resources/gen',
+    preserveRepoFiles: false
+  },
   php: {
     repo: 'Asana/php-asana',
     outputPath: 'src/Asana/Resources/Gen',
