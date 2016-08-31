@@ -33,7 +33,7 @@ var languages = {
   },
   ts: {
     repo: 'Asana/typescript-asana',
-    outputPath: 'lib/resources/gen',
+    outputPath: 'node_modules/resources/gen',
     preserveRepoFiles: false
   },
   php: {
