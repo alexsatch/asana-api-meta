@@ -274,6 +274,10 @@ var langs = {
     typeName: typeNameTranslator("java"),
     comment: wrapStarComment
   }),
+  "dotnet": _.merge({}, common, {
+    typeName: typeNameTranslator("dotnet"),
+    comment: wrapStarComment
+  }),
   "js": _.merge({}, common, {
     typeName: typeNameTranslator("js"),
     comment: wrapStarComment

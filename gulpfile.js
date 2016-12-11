@@ -41,6 +41,11 @@ var languages = {
     outputPath: 'src/main/java/com/asana/resources/gen',
     preserveRepoFiles: false
   },
+  dotnet: {
+    repo: 'Asana/dotnet-asana',
+    outputPath: 'src/resources/gen',
+    preserveRepoFiles: false
+  },
   python: {
     repo: 'Asana/python-asana',
     outputPath: 'asana/resources/gen',
