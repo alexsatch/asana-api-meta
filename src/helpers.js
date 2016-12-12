@@ -36,6 +36,10 @@ function prefixLines(text, prefix, skipFirst) {
   return (skipFirst ? "" : prefix) + text.trim().replace(/\n/g, "\n" + prefix);
 }
 
+function wrapXmlDocComment(text, indent) {
+  return wrapComment(text, _repeat(' ', indent || 0) + '///     ');
+}
+
 function wrapStarComment(text, indent) {
   return wrapComment(text, _repeat(' ', indent || 0) + ' * ');
 }
@@ -56,6 +60,12 @@ function typeNameTranslator(lang) {
       return ({
         Id: 'String',
         Enum: 'String'
+      })[name] || name;
+    },
+    dotnet: function(name) {
+      return ({
+        Id: 'string',
+        Enum: 'string'
       })[name] || name;
     }
   })[lang] || function(x) { return x; };
@@ -276,7 +286,7 @@ var langs = {
   }),
   "dotnet": _.merge({}, common, {
     typeName: typeNameTranslator("dotnet"),
-    comment: wrapStarComment
+    comment: wrapXmlDocComment
   }),
   "js": _.merge({}, common, {
     typeName: typeNameTranslator("js"),
