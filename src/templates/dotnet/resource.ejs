@@ -20,11 +20,15 @@ namespace Asana.Requests
         var path = action.path;
         var method = action.method.toUpperCase();
         var modelClass = single(camel(resource.name));
+        
         var returnClass;
+        var factoryMethod;
         if (action.collection) {
-            returnClass = "Request.CreateCollection<" + modelClass + ">";
+            factoryMethod = "Request.CreateCollection<" + modelClass + ">";
+            returnClass = "CollectionRequest<" + modelClass + ">";            
         } else {
-            returnClass = "Request.Create<" + modelClass + ">";
+            factoryMethod = "Request.Create<" + modelClass + ">";
+            returnClass = "ItemRequest<" + modelClass + ">";
         }
 
         var params = paramsForAction(action);
@@ -42,9 +46,9 @@ namespace Asana.Requests
         public <%= returnClass %> <%= camel(action.name) %>(<%= pathParamNamesAndTypes.join(", ") %>) 
         {<% if (pathParamNames.length > 0) { %>
             string path = string.Format(<%= JSON.stringify(path) %>, <%= pathParamNames.join(", ") %>);
-            return <%= returnClass %>(this, path, <%= JSON.stringify(method) %>);
+            return <%= factoryMethod %>(this, path, <%= JSON.stringify(method) %>);
         <% } else { %>
-            return <%= returnClass %>(this, <%= JSON.stringify(action.path) %>, <%= JSON.stringify(method) %>);
+            return <%= factoryMethod %>(this, <%= JSON.stringify(action.path) %>, <%= JSON.stringify(method) %>);
         <% } %>}<% }); %>
     }
 }
