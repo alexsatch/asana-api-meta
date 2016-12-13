@@ -1,8 +1,27 @@
-using System.Net.Http;
-using Asana.Models;
+<%
+
+function convertFormat(str) {
+    str = str || '';
+    var s = '';
+
+    var occurence = 0;
+    for (var i = 0; i < str.length; ++i) {
+        if (str[i] === '%')
+        {
+            s += '{' + occurence + '}';
+            i++;
+        } else {
+            s += str[i]; 
+        }
+    }
+
+    return s;
+}
+
+%>using Asana.Models;
 using Asana.Requests;
 
-namespace Asana.Requests 
+namespace Asana.Resources 
 {
     /// <summary>
 <%= comment(resource.comment, 4) %>
@@ -22,12 +41,9 @@ namespace Asana.Requests
         var modelClass = single(camel(resource.name));
         
         var returnClass;
-        var factoryMethod;
         if (action.collection) {
-            factoryMethod = "Request.CreateCollection<" + modelClass + ">";
             returnClass = "CollectionRequest<" + modelClass + ">";            
         } else {
-            factoryMethod = "Request.Create<" + modelClass + ">";
             returnClass = "ItemRequest<" + modelClass + ">";
         }
 
@@ -45,10 +61,10 @@ namespace Asana.Requests
         /// <returns> Request object </returns>        
         public <%= returnClass %> <%= camel(action.name) %>(<%= pathParamNamesAndTypes.join(", ") %>) 
         {<% if (pathParamNames.length > 0) { %>
-            string path = string.Format(<%= JSON.stringify(path) %>, <%= pathParamNames.join(", ") %>);
-            return <%= factoryMethod %>(this, path, <%= JSON.stringify(method) %>);
+            string path = string.Format(<%= convertFormat(JSON.stringify(path)) %>, <%= pathParamNames.join(", ") %>);
+            return new <%= returnClass %>(this.Client, path, <%= JSON.stringify(method) %>);
         <% } else { %>
-            return <%= factoryMethod %>(this, <%= JSON.stringify(action.path) %>, <%= JSON.stringify(method) %>);
+            return new <%= returnClass %>(this.Client, <%= JSON.stringify(path) %>, <%= JSON.stringify(method) %>);
         <% } %>}<% }); %>
     }
 }
